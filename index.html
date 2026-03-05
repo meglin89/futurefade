@@ -723,17 +723,85 @@
         /* ── Instagram ──────────────────────────── */
         .instagram { background: var(--bg-secondary); }
 
-        .instagram-embed-wrapper {
-            display: flex;
-            justify-content: center;
+        .ig-scroll-wrapper {
+            position: relative;
+            margin: 0 -24px;
         }
 
-        .instagram-embed-wrapper iframe,
-        .instagram-embed-wrapper blockquote {
-            margin: 0 auto !important;
-            max-width: 540px !important;
-            width: 100% !important;
+        .ig-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 24px 16px;
+            scrollbar-width: none;
+        }
+
+        .ig-scroll::-webkit-scrollbar { display: none; }
+
+        .ig-card {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
             border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1 / 1;
+            background: var(--bg-card);
+            transition: transform 0.3s ease;
+        }
+
+        .ig-card:hover { transform: scale(1.03); }
+
+        .ig-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ig-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,15,0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .ig-card:hover::after { opacity: 1; }
+
+        .ig-card .ig-icon {
+            position: absolute;
+            bottom: 14px;
+            left: 14px;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            color: #fff;
+        }
+
+        .ig-card:hover .ig-icon { opacity: 1; }
+
+        .ig-scroll-fade {
+            position: absolute;
+            top: 0;
+            bottom: 16px;
+            width: 60px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .ig-scroll-fade--left {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-secondary), transparent);
+        }
+
+        .ig-scroll-fade--right {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-secondary), transparent);
         }
 
         .instagram-follow {
@@ -749,6 +817,10 @@
         }
 
         .instagram-follow a:hover { opacity: 0.7; }
+
+        @media (max-width: 768px) {
+            .ig-card { flex: 0 0 240px; }
+        }
 
         /* ── CTA ────────────────────────────────── */
         .cta {
@@ -1154,11 +1226,50 @@
             <h2 class="section-title">On the Gram</h2>
             <p class="section-desc">See our latest work and shop vibes on Instagram.</p>
         </div>
-        <div class="instagram-embed-wrapper">
-            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/futurefadebarbershop/p/C1EtVgeMTNG/?img_index=1" data-instgrm-version="14" style="background:#16161f; border:1px solid rgba(255,255,255,0.06); border-radius:12px; max-width:540px; min-width:326px; padding:0; width:calc(100% - 2px);">
-                <a href="https://www.instagram.com/futurefadebarbershop/p/C1EtVgeMTNG/?img_index=1" target="_blank" rel="noopener" style="display:block; padding:16px; text-align:center; color:var(--text-secondary); font-size:0.9rem;">View this post on Instagram</a>
-            </blockquote>
+    </div>
+    <div class="ig-scroll-wrapper">
+        <div class="ig-scroll-fade ig-scroll-fade--left"></div>
+        <div class="ig-scroll">
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-low-taper-fade-vancouver-barbershop.jpg" alt="Low taper fade haircut at Future Fade Barbershop Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-mid-skin-taper-fade-vancouver.jpg" alt="Mid skin taper fade at Future Fade Barbershop Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-fade-design-future-fade-vancouver.jpg" alt="Fade with hair design at Future Fade Barbershop Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-fade-hair-design-vancouver-barber.jpg" alt="Hair design and fade by Vancouver barber at Future Fade" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-high-skin-fade-vancouver.jpg" alt="High skin fade haircut at Future Fade Barbershop Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-clean-skin-fade-curls-colour.jpg" alt="Clean skin fade with curls and colour at Future Fade Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-fades-long-short-hair-vancouver.jpg" alt="Precision fade for all hair types at Future Fade Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-hair-tattoo-highlights-vancouver.jpg" alt="Hair tattoo and highlights at Future Fade Barbershop Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
+            <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener" class="ig-card">
+                <img src="ig-get-fresh-cut-future-fade.jfif" alt="Fresh cut at Future Fade Barbershop Vancouver" loading="lazy">
+                <span class="ig-icon">&#9741;</span>
+            </a>
         </div>
+        <div class="ig-scroll-fade ig-scroll-fade--right"></div>
+    </div>
+    <div class="container">
         <div class="instagram-follow">
             <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener">@futurefadebarbershop &rarr;</a>
         </div>
@@ -1358,8 +1469,6 @@
 
 </script>
 
-<!-- Instagram Embed -->
-<script async src="https://www.instagram.com/embed.js"></script>
 
 <!-- Three.js Liquid Gradients -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
