@@ -365,6 +365,7 @@
             overflow: hidden;
             background: var(--bg-card);
             border: 1px solid var(--border);
+            will-change: transform, opacity;
         }
 
         .hero-image-frame::after {
@@ -989,6 +990,8 @@
             .hero-grid,
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
 
+            .hero-image-frame { display: none; }
+
             .services-grid { grid-template-columns: 1fr 1fr; }
             .team-grid { grid-template-columns: 1fr; }
 
@@ -1532,6 +1535,20 @@
         });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => observer.observe(s));
+
+    // Hero image parallax fade
+    const heroFrame = document.querySelector('.hero-image-frame');
+    const heroSection = document.getElementById('hero');
+    if (heroFrame && heroSection) {
+        window.addEventListener('scroll', () => {
+            const rect = heroSection.getBoundingClientRect();
+            const heroH = heroSection.offsetHeight;
+            const scrolled = Math.max(0, -rect.top);
+            const progress = Math.min(scrolled / (heroH * 0.7), 1);
+            heroFrame.style.opacity = 1 - progress;
+            heroFrame.style.transform = `translateY(${scrolled * 0.35}px)`;
+        }, { passive: true });
+    }
 
     // Smooth close mobile menu on link click
     document.querySelectorAll('.nav-links a').forEach(a => {
