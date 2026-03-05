@@ -1505,6 +1505,9 @@
     // IG gallery: drag-to-scroll + arrow buttons
     const igScroll = document.getElementById('igScroll');
     if (igScroll) {
+        // Center the scroll on load
+        igScroll.scrollLeft = (igScroll.scrollWidth - igScroll.clientWidth) / 2;
+
         const scrollAmt = 316; // card width + gap
         document.getElementById('igArrowLeft').addEventListener('click', () => {
             igScroll.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
