@@ -849,6 +849,41 @@
 
         .instagram-follow a:hover { opacity: 0.7; }
 
+        .ig-testimonial {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .ig-testimonial .stars {
+            color: #f5c518;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .ig-testimonial blockquote {
+            font-family: 'PP Neue Machina', 'Arial Black', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-style: italic;
+            margin: 0 auto 6px;
+            line-height: 1.6;
+        }
+
+        .ig-testimonial cite {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: normal;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .ig-testimonial cite:last-child {
+            margin-bottom: 0;
+        }
+
         @media (max-width: 768px) {
             .ig-card { flex: 0 0 240px; }
             .ig-scroll { padding: 0 24px 16px; }
@@ -992,6 +1027,10 @@
             .hero-image-frame { display: none; }
 
             .services-grid { grid-template-columns: 1fr 1fr; }
+            .service-card { display: grid; grid-template-columns: 36px 1fr; grid-template-rows: auto auto; gap: 0 12px; align-items: center; padding: 24px 20px; }
+            .service-icon { margin-bottom: 0; width: 36px; height: 36px; font-size: 1.1rem; }
+            .service-card h3 { margin-bottom: 0; font-size: 1.05rem; }
+            .service-card p { grid-column: 1 / -1; margin-top: 8px; }
             .team-grid { grid-template-columns: 1fr; }
 
             .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1116,7 +1155,7 @@
 <!-- ── Navigation ──────────────────────────────── -->
 <nav>
     <div class="container">
-        <a href="#" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="currentColor"><path d="M 22 28 L 37 10 L 142 10 L 142 42 L 57 42 L 57 70 L 112 70 L 112 102 L 57 102 L 57 138 L 22 138 Z"/><path d="M 178 172 L 163 190 L 58 190 L 58 158 L 143 158 L 143 130 L 88 130 L 88 98 L 143 98 L 143 62 L 178 62 Z"/></svg><span class="nav-logo-text">Future<span>Fade</span></span></a>
+        <a href="#" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="currentColor"><path d="M 22 28 L 37 10 L 142 10 L 142 42 L 57 42 L 57 70 L 112 70 L 112 102 L 57 102 L 57 138 L 22 138 Z"/><path d="M 178 172 L 163 190 L 58 190 L 58 158 L 143 158 L 143 130 L 88 130 L 88 98 L 143 98 L 143 62 L 178 62 Z"/></svg><span class="nav-logo-text">Future <span>Fade</span></span></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#services">Services</a></li>
             <li><a href="#team">Team</a></li>
@@ -1439,6 +1478,15 @@
         <div class="instagram-follow">
             <a href="https://www.instagram.com/futurefadebarbershop" target="_blank" rel="noopener">@futurefadebarbershop &rarr;</a>
         </div>
+        <div class="ig-testimonial">
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>&ldquo;My go-to barbershop.&rdquo;</blockquote>
+            <cite>— George S.</cite>
+            <blockquote>&ldquo;The best fade I&rsquo;ve ever had.&rdquo;</blockquote>
+            <cite>— Daniel G.</cite>
+            <blockquote>&ldquo;I will go back without a doubt.&rdquo;</blockquote>
+            <cite>— Garrett E.</cite>
+        </div>
     </div>
 </section>
 
@@ -1463,7 +1511,7 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="#" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="currentColor"><path d="M 22 28 L 37 10 L 142 10 L 142 42 L 57 42 L 57 70 L 112 70 L 112 102 L 57 102 L 57 138 L 22 138 Z"/><path d="M 178 172 L 163 190 L 58 190 L 58 158 L 143 158 L 143 130 L 88 130 L 88 98 L 143 98 L 143 62 L 178 62 Z"/></svg><span class="nav-logo-text">Future<span>Fade</span></span></a>
+                <a href="#" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="currentColor"><path d="M 22 28 L 37 10 L 142 10 L 142 42 L 57 42 L 57 70 L 112 70 L 112 102 L 57 102 L 57 138 L 22 138 Z"/><path d="M 178 172 L 163 190 L 58 190 L 58 158 L 143 158 L 143 130 L 88 130 L 88 98 L 143 98 L 143 62 L 178 62 Z"/></svg><span class="nav-logo-text">Future <span>Fade</span></span></a>
                 <p>Premium barbershop in Vancouver's South Granville neighbourhood. Precision cuts, modern style.</p>
                 <div class="social-links">
                     <a href="https://www.instagram.com/futurefadebarbershop" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">&#128247;</a>
