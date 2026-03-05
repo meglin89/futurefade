@@ -725,7 +725,7 @@
 
         .ig-scroll-wrapper {
             position: relative;
-            margin: 0 -24px;
+            overflow: hidden;
         }
 
         .ig-scroll {
@@ -733,16 +733,17 @@
             gap: 16px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            padding: 0 24px 16px;
+            padding: 0 calc((100vw - 1200px) / 2 + 80px) 16px;
             scrollbar-width: none;
         }
 
         .ig-scroll::-webkit-scrollbar { display: none; }
 
         .ig-card {
-            flex: 0 0 280px;
-            scroll-snap-align: start;
+            flex: 0 0 300px;
+            scroll-snap-align: center;
             border-radius: var(--radius);
             overflow: hidden;
             position: relative;
@@ -789,20 +790,50 @@
             position: absolute;
             top: 0;
             bottom: 16px;
-            width: 60px;
+            width: 100px;
             pointer-events: none;
             z-index: 2;
         }
 
         .ig-scroll-fade--left {
             left: 0;
-            background: linear-gradient(to right, var(--bg-secondary), transparent);
+            background: linear-gradient(to right, var(--bg-secondary) 10%, transparent);
         }
 
         .ig-scroll-fade--right {
             right: 0;
-            background: linear-gradient(to left, var(--bg-secondary), transparent);
+            background: linear-gradient(to left, var(--bg-secondary) 10%, transparent);
         }
+
+        .ig-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(calc(-50% - 8px));
+            z-index: 3;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(22,22,31,0.85);
+            backdrop-filter: blur(8px);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, border-color 0.2s, opacity 0.3s;
+            opacity: 0.8;
+        }
+
+        .ig-arrow:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            opacity: 1;
+        }
+
+        .ig-arrow--left { left: 20px; }
+        .ig-arrow--right { right: 20px; }
 
         .instagram-follow {
             text-align: center;
@@ -820,6 +851,8 @@
 
         @media (max-width: 768px) {
             .ig-card { flex: 0 0 240px; }
+            .ig-scroll { padding: 0 24px 16px; }
+            .ig-arrow { display: none; }
         }
 
         /* ── CTA ────────────────────────────────── */
@@ -1361,6 +1394,8 @@
             </a>
         </div>
         <div class="ig-scroll-fade ig-scroll-fade--right"></div>
+        <button class="ig-arrow ig-arrow--left" id="igArrowLeft" aria-label="Scroll left">&#8249;</button>
+        <button class="ig-arrow ig-arrow--right" id="igArrowRight" aria-label="Scroll right">&#8250;</button>
     </div>
     <div class="container">
         <div class="instagram-follow">
@@ -1467,12 +1502,20 @@
         a.addEventListener('click', () => links.classList.remove('open'));
     });
 
-    // Drag-to-scroll for IG gallery on desktop
+    // IG gallery: drag-to-scroll + arrow buttons
     const igScroll = document.getElementById('igScroll');
     if (igScroll) {
-        let isDown = false, startX, scrollLeft;
+        const scrollAmt = 316; // card width + gap
+        document.getElementById('igArrowLeft').addEventListener('click', () => {
+            igScroll.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
+        });
+        document.getElementById('igArrowRight').addEventListener('click', () => {
+            igScroll.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+        });
+
+        let isDown = false, startX, scrollLeft, dragged = false;
         igScroll.addEventListener('mousedown', e => {
-            isDown = true;
+            isDown = true; dragged = false;
             igScroll.style.cursor = 'grabbing';
             startX = e.pageX - igScroll.offsetLeft;
             scrollLeft = igScroll.scrollLeft;
@@ -1482,8 +1525,13 @@
         igScroll.addEventListener('mousemove', e => {
             if (!isDown) return;
             e.preventDefault();
+            dragged = true;
             const x = e.pageX - igScroll.offsetLeft;
             igScroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
+        });
+        // Prevent link navigation when dragging
+        igScroll.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', e => { if (dragged) e.preventDefault(); });
         });
         igScroll.style.cursor = 'grab';
     }
