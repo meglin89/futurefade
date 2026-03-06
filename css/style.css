@@ -140,7 +140,7 @@
             position: relative;
             overflow: hidden;
             padding-top: 80px;
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
         }
 
         .hero-video {
@@ -150,19 +150,6 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-        }
-
-        .hero-gradient-canvas {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            opacity: 0.4;
-        }
-
-        .hero-gradient-canvas canvas {
-            width: 100% !important;
-            height: 100% !important;
-            display: block;
         }
 
         .hero .container {
@@ -348,7 +335,9 @@
         .section-header.center .section-desc { margin: 0 auto; }
 
         /* ── Services ───────────────────────────── */
-        .services { background: var(--bg-secondary); }
+        .services { background: var(--bg-secondary); position: relative; overflow: hidden; margin-top: -5px; padding-top: 105px; }
+        .services .gradient-bg-canvas { opacity: 0.55; }
+        .services .container { position: relative; z-index: 1; }
 
         .cta .container {
             position: relative;
@@ -375,7 +364,8 @@
         }
 
         .service-card {
-            background: var(--bg-card);
+            background: rgba(22, 22, 31, 0.75);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 36px 28px;
@@ -746,39 +736,44 @@
 
         .instagram-follow a:hover { opacity: 0.7; }
 
-        .ig-testimonial {
-            text-align: center;
-            margin-top: 48px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
+        /* ── Testimonials ───────────────────────── */
+        .testimonials { background: var(--bg-primary); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
         }
 
-        .ig-testimonial .stars {
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            text-align: center;
+        }
+
+        .testimonial-card .stars {
             color: #f5c518;
             font-size: 1.2rem;
             letter-spacing: 2px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
-        .ig-testimonial blockquote {
+        .testimonial-card blockquote {
             font-family: 'PP Neue Machina', 'Arial Black', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-primary);
             font-style: italic;
-            margin: 0 auto 6px;
+            margin: 0 auto 12px;
             line-height: 1.6;
         }
 
-        .ig-testimonial cite {
-            font-size: 0.8rem;
+        .testimonial-card cite {
+            font-size: 0.85rem;
             color: var(--text-muted);
             font-style: normal;
             display: block;
-            margin-bottom: 20px;
-        }
-
-        .ig-testimonial cite:last-child {
-            margin-bottom: 0;
         }
 
         @media (max-width: 768px) {
@@ -932,6 +927,7 @@
             .service-card h3 { margin-bottom: 0; font-size: 1.05rem; }
             .service-card p { grid-column: 1 / -1; margin-top: 8px; }
             .team-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
 
             .footer-grid { grid-template-columns: 1fr 1fr; }
 

@@ -233,16 +233,16 @@
         window.addEventListener('resize', resize);
     }
 
-    // Hero — purple + gold on dark
-    createGradient('heroGradient', 'hero', {
-        bg: 0x0a0a0f,
-        base: [0.039, 0.039, 0.059],
+    // Services — purple + gold on dark
+    createGradient('servicesGradient', 'services', {
+        bg: 0x111118,
+        base: [0.067, 0.067, 0.094],
         c1: [0.424, 0.388, 1.0],       // accent purple
-        c2: [0.039, 0.039, 0.059],      // bg primary
+        c2: [0.067, 0.067, 0.094],      // bg secondary
         c3: [0.788, 0.663, 0.431],      // gold
-        c4: [0.067, 0.067, 0.094],      // bg secondary
+        c4: [0.039, 0.039, 0.059],      // bg primary
         c5: [0.3, 0.27, 0.85],          // deeper purple
-        c6: [0.039, 0.039, 0.059],      // bg primary
+        c6: [0.067, 0.067, 0.094],      // bg secondary
         speed: 0.8, intensity: 1.4, w1: 0.45, w2: 1.6, gradientSize: 0.5
     });
 
